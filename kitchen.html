@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kitchen Orders</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+}
+
+header {
+    background: #8b0000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.order {
+    background: white;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px #ccc;
+}
+
+.order h2 {
+    margin-top: 0;
+}
+
+.status {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+#message {
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>👨‍🍳 Kitchen Dashboard</h1>
+    <p>Hotel Pratap Palace</p>
+</header>
+
+<div id="message">
+    ⏳ Orders loading...
+</div>
+
+<div id="orders"></div>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycby37fULojmJ1NXQjokAMsbESNBdAPkLePESktR6v9S9vApO_tZK3ykd7XsURnXMLdi4/exec";
+
+
+function loadOrders() {
+
+    fetch(SCRIPT_URL)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        const orders = document.getElementById("orders");
+
+        orders.innerHTML = "";
+
+        if (data.length <= 1) {
+            document.getElementById("message").textContent =
+                "📭 अभी कोई order नहीं है।";
+            return;
+        }
+
+        document.getElementById("message").textContent =
+            "✅ Orders loaded";
+
+        /* Header row हटाकर बाकी rows */
+        for (let i = 1; i < data.length; i++) {
+
+            const row = data[i];
+
+            const time = row[0];
+            const table = row[1];
+            const item = row[2];
+            const quantity = row[3];
+            const price = row[4];
+            const total = row[5];
+            const status = row[6];
+
+            const orderBox =
+                document.createElement("div");
+
+            orderBox.className = "order";
+
+            orderBox.innerHTML = `
+                <h2>🪑 Table ${table}</h2>
+
+                <p><b>🕐 Time:</b> ${time}</p>
+
+                <p><b>🍽️ Item:</b> ${item}</p>
+
+                <p><b>🔢 Quantity:</b> ${quantity}</p>
+
+                <p><b>💰 Price:</b> ₹${price}</p>
+
+                <p><b>💵 Total:</b> ₹${total}</p>
+
+                <div class="status">
+                    Status:
+                </div>
+
+                <select onchange="changeStatus(${i + 1}, this.value)">
+
+                    <option value="New"
+                    ${status == "New" ? "selected" : ""}>
+                    New
+                    </option>
+
+                    <option value="Preparing"
+                    ${status == "Preparing" ? "selected" : ""}>
+                    Preparing
+                    </option>
+
+                    <option value="Complete"
+                    ${status == "Complete" ? "selected" : ""}>
+                    Complete
+                    </option>
+
+                    <option value="Delivered"
+                    ${status == "Delivered" ? "selected" : ""}>
+                    Delivered
+                    </option>
+
+                </select>
+            `;
+
+            orders.appendChild(orderBox);
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("message").textContent =
+            "❌ Orders load नहीं हो सके।";
+
+    });
+}
+
+
+function changeStatus(row, status) {
+
+    fetch(SCRIPT_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify({
+            action: "updateStatus",
+            row: row,
+            status: status
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            alert("✅ Status updated: " + status);
+
+        } else {
+
+            alert("❌ Status update नहीं हुआ।");
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("❌ Error हुआ।");
+
+    });
+}
+
+
+/* पहली बार orders load */
+loadOrders();
+
+
+/* हर 10 सेकंड में नए orders check */
+setInterval(loadOrders, 10000);
+
+</script>
+
+</body>
+</html>
