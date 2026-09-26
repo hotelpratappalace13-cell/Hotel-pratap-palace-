@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Pratap Palace - Order</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+    }
+
+    header {
+        background: #8b0000;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .table-box {
+        background: white;
+        margin: 15px;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .menu {
+        padding: 10px;
+    }
+
+    .food {
+        background: white;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px #ddd;
+    }
+
+    .food-name {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .price {
+        color: #008000;
+        margin-top: 5px;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    button {
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .minus {
+        background: #ff5252;
+        color: white;
+    }
+
+    .plus {
+        background: #28a745;
+        color: white;
+    }
+
+    .qty {
+        min-width: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .cart {
+        background: white;
+        margin: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px #ddd;
+    }
+
+    .total {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .order-btn {
+        width: 100%;
+        background: #ff6600;
+        color: white;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #message {
+        text-align: center;
+        font-weight: bold;
+        margin: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🍽️ Hotel Pratap Palace</h1>
+    <p>Lalganj, Uttar Pradesh</p>
+</header>
+
+<div class="table-box">
+    🪑 Table Number: <span id="tableNumber">-</span>
+</div>
+
+<div class="menu">
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍕 Margherita Pizza</div>
+            <div class="price">₹120</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Margherita Pizza',120,-1)">−</button>
+            <span class="qty" id="qty-Margherita Pizza">0</span>
+            <button class="plus" onclick="changeQty('Margherita Pizza',120,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍕 Cheese Pizza</div>
+            <div class="price">₹150</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Cheese Pizza',150,-1)">−</button>
+            <span class="qty" id="qty-Cheese Pizza">0</span>
+            <button class="plus" onclick="changeQty('Cheese Pizza',150,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍕 Paneer Pizza</div>
+            <div class="price">₹180</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Paneer Pizza',180,-1)">−</button>
+            <span class="qty" id="qty-Paneer Pizza">0</span>
+            <button class="plus" onclick="changeQty('Paneer Pizza',180,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍔 Veg Burger</div>
+            <div class="price">₹70</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Veg Burger',70,-1)">−</button>
+            <span class="qty" id="qty-Veg Burger">0</span>
+            <button class="plus" onclick="changeQty('Veg Burger',70,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍔 Cheese Burger</div>
+            <div class="price">₹90</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Cheese Burger',90,-1)">−</button>
+            <span class="qty" id="qty-Cheese Burger">0</span>
+            <button class="plus" onclick="changeQty('Cheese Burger',90,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🍜 Veg Chowmein</div>
+            <div class="price">₹70</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Veg Chowmein',70,-1)">−</button>
+            <span class="qty" id="qty-Veg Chowmein">0</span>
+            <button class="plus" onclick="changeQty('Veg Chowmein',70,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🥤 Cold Drink</div>
+            <div class="price">₹40</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Cold Drink',40,-1)">−</button>
+            <span class="qty" id="qty-Cold Drink">0</span>
+            <button class="plus" onclick="changeQty('Cold Drink',40,1)">+</button>
+        </div>
+    </div>
+
+    <div class="food">
+        <div>
+            <div class="food-name">🥭 Mango Shake</div>
+            <div class="price">₹80</div>
+        </div>
+
+        <div class="buttons">
+            <button class="minus" onclick="changeQty('Mango Shake',80,-1)">−</button>
+            <span class="qty" id="qty-Mango Shake">0</span>
+            <button class="plus" onclick="changeQty('Mango Shake',80,1)">+</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="cart">
+
+    <h2>🛒 Your Order</h2>
+
+    <div id="cartItems">
+        कोई item नहीं चुना गया।
+    </div>
+
+    <div class="total">
+        Total: ₹<span id="total">0</span>
+    </div>
+
+    <button class="order-btn" onclick="placeOrder()">
+        ✅ Place Order
+    </button>
+
+</div>
+
+<div id="message"></div>
+
+<script>
+
+/* Google Apps Script Web App */
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycby37fULojmJ1NXQjokAMsbESNBdAPkLePESktR6v9S9vApO_tZK3ykd7XsURnXMLdi4/exec";
+
+
+/* Table number URL से लेना */
+const urlParams = new URLSearchParams(window.location.search);
+const table = urlParams.get("table");
+
+document.getElementById("tableNumber").textContent =
+    table ? table : "Not Found";
+
+
+/* Cart */
+const cart = {};
+
+
+/* Quantity बदलना */
+function changeQty(name, price, change) {
+
+    if (!cart[name]) {
+        cart[name] = {
+            price: price,
+            qty: 0
+        };
+    }
+
+    cart[name].qty += change;
+
+    if (cart[name].qty < 0) {
+        cart[name].qty = 0;
+    }
+
+    const qtyElement =
+        document.getElementById("qty-" + name);
+
+    if (qtyElement) {
+        qtyElement.textContent = cart[name].qty;
+    }
+
+    updateCart();
+}
+
+
+/* Cart update */
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    let total = 0;
+    let html = "";
+
+    for (const name in cart) {
+
+        const qty = cart[name].qty;
+        const price = cart[name].price;
+
+        if (qty > 0) {
+
+            const amount = qty * price;
+
+            total += amount;
+
+            html += `
+                <p>
+                    <b>${name}</b>
+                    × ${qty}
+                    = ₹${amount}
+                </p>
+            `;
+        }
+    }
+
+    if (html === "") {
+        html = "कोई item नहीं चुना गया।";
+    }
+
+    cartItems.innerHTML = html;
+
+    document.getElementById("total").textContent = total;
+}
+
+
+/* Order Google Sheet में भेजना */
+function placeOrder() {
+
+    if (!table) {
+        alert("❌ Table number नहीं मिला!");
+        return;
+    }
+
+    const items = [];
+    let grandTotal = 0;
+
+    for (const name in cart) {
+
+        const qty = cart[name].qty;
+        const price = cart[name].price;
+
+        if (qty > 0) {
+
+            items.push({
+                name: name,
+                qty: qty,
+                price: price
+            });
+
+            grandTotal += qty * price;
+        }
+    }
+
+    if (items.length === 0) {
+        alert("⚠️ पहले कोई food item चुनें!");
+        return;
+    }
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "⏳ Order भेजा जा रहा है...";
+
+
+    const orderData = {
+        table: table,
+        items: items
+    };
+
+
+    fetch(SCRIPT_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify(orderData)
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            message.textContent =
+                "✅ Order Successfully भेज दिया गया!";
+
+            alert(
+                "✅ Order Successfully भेज दिया गया!\n\n" +
+                "Table: " + table +
+                "\nTotal: ₹" + grandTotal
+            );
+
+        } else {
+
+            message.textContent =
+                "❌ Order भेजने में समस्या हुई।";
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        message.textContent =
+            "❌ Internet या server की समस्या हुई।";
+
+        alert(
+            "❌ Order भेजने में समस्या हुई।\n\n" +
+            "कृपया दोबारा कोशिश करें।"
+        );
+
+    });
+}
+
+</script>
+
+</body>
+</html>
