@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ITI Chai Wala | Owner Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f1ed;
+    color:#29221d;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#21150f,#4a2c1d);
+    color:white;
+    padding:28px 20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+.header-content{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:55px;
+    height:55px;
+    background:#d6a85a;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.logo h1{
+    font-size:25px;
+}
+
+.logo p{
+    color:#d8c8ba;
+    margin-top:4px;
+    font-size:13px;
+}
+
+.owner{
+    background:rgba(255,255,255,.1);
+    padding:10px 16px;
+    border-radius:25px;
+    font-size:14px;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 18px;
+}
+
+/* WELCOME */
+
+.welcome{
+    margin-bottom:25px;
+}
+
+.welcome h2{
+    font-size:25px;
+}
+
+.welcome p{
+    color:#777;
+    margin-top:6px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.stat{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 5px 18px rgba(60,40,20,.08);
+    border:1px solid #eee3d8;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.stat h4{
+    color:#777;
+    font-size:14px;
+    font-weight:normal;
+}
+
+.stat h2{
+    margin-top:7px;
+    font-size:28px;
+}
+
+.stat small{
+    display:block;
+    margin-top:8px;
+    color:#777;
+}
+
+/* MAIN GRID */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+    margin-top:22px;
+}
+
+/* BOX */
+
+.box{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 5px 18px rgba(60,40,20,.08);
+    border:1px solid #eee3d8;
+}
+
+.box-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.box-title h2{
+    font-size:19px;
+}
+
+.view{
+    color:#8b5a35;
+    font-size:13px;
+}
+
+/* ORDERS */
+
+.order{
+    border:1px solid #eee;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.order-left b{
+    font-size:15px;
+}
+
+.order-left p{
+    color:#777;
+    font-size:13px;
+    margin-top:6px;
+}
+
+.order-right{
+    text-align:right;
+}
+
+.price{
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+    background:#fff0c2;
+    color:#805d00;
+}
+
+.complete{
+    background:#dff4e5;
+    color:#26733d;
+}
+
+.new{
+    background:#e7efff;
+    color:#2456a6;
+}
+
+/* POPULAR */
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:13px 0;
+    border-bottom:1px solid #eee;
+}
+
+.item:last-child{
+    border-bottom:none;
+}
+
+.item-name{
+    font-weight:bold;
+}
+
+.item-sales{
+    color:#8b5a35;
+    font-size:13px;
+}
+
+/* TABLES */
+
+.tables{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.table{
+    padding:17px 10px;
+    text-align:center;
+    border-radius:14px;
+    border:1px solid #eee;
+    background:#fafafa;
+}
+
+.table-number{
+    font-size:19px;
+    font-weight:bold;
+}
+
+.table-status{
+    margin-top:7px;
+    font-size:11px;
+}
+
+.available{
+    color:#268044;
+}
+
+.busy{
+    color:#b35b16;
+}
+
+/* QUICK ACTIONS */
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:22px;
+}
+
+.action{
+    background:linear-gradient(135deg,#4a2c1d,#24160f);
+    color:white;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.action-icon{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.action p{
+    font-size:13px;
+    color:#ddd;
+}
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#888;
+}
+
+.error{
+    text-align:center;
+    padding:15px;
+    color:#b00020;
+    background:#fff0f0;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    padding:25px;
+    color:#888;
+    font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header-content{
+        align-items:flex-start;
+    }
+
+    .owner{
+        display:none;
+    }
+
+    .logo h1{
+        font-size:21px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:17px;
+    }
+
+    .stat h2{
+        font-size:23px;
+    }
+
+    .tables{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+    .order{
+        align-items:flex-start;
+    }
+
+}
+
+/* SMALL SCREEN */
+
+@media(max-width:380px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="header-content">
+
+<div class="logo">
+
+<div class="logo-icon">☕</div>
+
+<div>
+<h1>ITI CHAI WALA</h1>
+<p>Premium Owner Dashboard</p>
+</div>
+
+</div>
+
+<div class="owner">
+👑 Owner Panel
+</div>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+<h2>Good Morning, Owner 👋</h2>
+
+<p id="dateText">
+आज आपके restaurant का पूरा overview यहाँ मिलेगा।
+</p>
+
+</div>
+
+
+<!-- ERROR -->
+
+<div id="errorBox" class="error" style="display:none;"></div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-icon">📦</div>
+
+<h4>TOTAL ORDERS</h4>
+
+<h2 id="totalOrders">0</h2>
+
+<small>आज के orders</small>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-icon">💰</div>
+
+<h4>TODAY'S SALES</h4>
+
+<h2 id="todaySales">₹0</h2>
+
+<small>आज की बिक्री</small>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-icon">🍔</div>
+
+<h4>ITEMS SOLD</h4>
+
+<h2 id="itemsSold">0</h2>
+
+<small>आज बिके items</small>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-icon">🪑</div>
+
+<h4>ACTIVE TABLES</h4>
+
+<h2 id="activeTables">0 / 7</h2>
+
+<small>अभी occupied</small>
+
+</div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main-grid">
+
+
+<!-- LIVE ORDERS -->
+
+<div class="box">
+
+<div class="box-title">
+
+<h2>📦 Live Orders</h2>
+
+<span class="view" id="liveCount">
+Live
+</span>
+
+</div>
+
+<div id="ordersList">
+
+<div class="loading">
+Orders loading...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- POPULAR -->
+
+<div class="box">
+
+<div class="box-title">
+
+<h2>🔥 Popular Items</h2>
+
+</div>
+
+<div id="popularItems">
+
+<div class="loading">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TABLE STATUS -->
+
+<div class="box" style="margin-top:22px;">
+
+<div class="box-title">
+
+<h2>🪑 Table Status</h2>
+
+<span class="view">7 Tables</span>
+
+</div>
+
+<div class="tables" id="tablesList">
+
+</div>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="actions">
+
+<div class="action">
+
+<div class="action-icon">📊</div>
+
+<b>Sales Report</b>
+
+<p>आज की पूरी बिक्री देखें</p>
+
+</div>
+
+
+<div class="action">
+
+<div class="action-icon">🍽️</div>
+
+<b>Manage Menu</b>
+
+<p>Food items manage करें</p>
+
+</div>
+
+
+<div class="action">
+
+<div class="action-icon">⚙️</div>
+
+<b>Settings</b>
+
+<p>Restaurant settings</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="footer">
+
+ITI CHAI WALA • Owner Dashboard
+
+</div>
+
+
+<script>
+
+/* =========================================
+   GOOGLE APPS SCRIPT URL
+========================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx7PWk-_E0MU2bn5VsLMVHGMGbZFVjRaSYCXJXn50ay2_kodfrKc43EddUNc7EujMJb8g/exec";
+
+
+/* =========================================
+   LOAD DATA
+========================================= */
+
+function loadDashboard(){
+
+    fetch(API_URL)
+
+    .then(response => {
+
+        if(!response.ok){
+            throw new Error("Server response error");
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log("Google Sheet Data:", data);
+
+        processData(data);
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("errorBox").style.display="block";
+
+        document.getElementById("errorBox").innerText =
+        "Google Sheet से data नहीं मिल रहा। कृपया connection check करें।";
+
+    });
+
+}
+
+
+/* =========================================
+   DATE PARSER
+========================================= */
+
+function parseDate(value){
+
+    if(!value){
+        return null;
+    }
+
+    let d = new Date(value);
+
+    if(!isNaN(d.getTime())){
+        return d;
+    }
+
+    return null;
+}
+
+
+/* =========================================
+   CHECK TODAY
+========================================= */
+
+function isToday(value){
+
+    const d = parseDate(value);
+
+    if(!d){
+        return false;
+    }
+
+    const now = new Date();
+
+    return (
+        d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth() &&
+        d.getDate() === now.getDate()
+    );
+
+}
+
+
+/* =========================================
+   PROCESS GOOGLE SHEET DATA
+========================================= */
+
+function processData(data){
+
+    if(!Array.isArray(data) || data.length < 2){
+
+        document.getElementById("totalOrders").innerText="0";
+        document.getElementById("todaySales").innerText="₹0";
+        document.getElementById("itemsSold").innerText="0";
+
+        showEmptyOrders();
+
+        return;
+    }
+
+
+    /*
+       Google Sheet:
+
+       A = time
+       B = table
+       C = item
+       D = quantity
+       E = price
+       F = total
+       G = status
+       H = order Id
+    */
+
+
+    const rows = data.slice(1);
+
+
+    /* =========================================
+       TODAY DATA
+    ========================================= */
+
+    const todayRows = rows.filter(row => isToday(row[0]));
+
+
+    /* =========================================
+       UNIQUE ORDERS
+    ========================================= */
+
+    const orderIds = new Set();
+
+    todayRows.forEach(row => {
+
+        const orderId = String(row[7] || "").trim();
+
+        if(orderId){
+            orderIds.add(orderId);
+        }
+
+    });
+
+
+    document.getElementById("totalOrders").innerText =
+    orderIds.size;
+
+
+    /* =========================================
+       TODAY SALES
+    ========================================= */
+
+    let sales = 0;
+
+    todayRows.forEach(row => {
+
+        const total = Number(row[5]) || 0;
+
+        sales += total;
+
+    });
+
+
+    document.getElementById("todaySales").innerText =
+    "₹" + sales.toLocaleString("en-IN");
+
+
+    /* =========================================
+       ITEMS SOLD
+    ========================================= */
+
+    let items = 0;
+
+    todayRows.forEach(row => {
+
+        items += Number(row[3]) || 0;
+
+    });
+
+
+    document.getElementById("itemsSold").innerText =
+    items;
+
+
+    /* =========================================
+       POPULAR ITEMS
+    ========================================= */
+
+    const itemMap = {};
+
+    todayRows.forEach(row => {
+
+        const item = String(row[2] || "Unknown");
+
+        const qty = Number(row[3]) || 0;
+
+        if(!itemMap[item]){
+            itemMap[item] = 0;
+        }
+
+        itemMap[item] += qty;
+
+    });
+
+
+    const popular = Object.entries(itemMap)
+
+    .sort((a,b) => b[1] - a[1])
+
+    .slice(0,5);
+
+
+    const popularBox =
+    document.getElementById("popularItems");
+
+
+    if(popular.length === 0){
+
+        popularBox.innerHTML =
+        '<div class="loading">आज अभी कोई item नहीं बिका।</div>';
+
+    }else{
+
+        popularBox.innerHTML = "";
+
+        popular.forEach(item => {
+
+            const div = document.createElement("div");
+
+            div.className="item";
+
+            div.innerHTML = `
+
+                <span class="item-name">
+                    🍽️ ${escapeHTML(item[0])}
+                </span>
+
+                <span class="item-sales">
+                    ${item[1]} sold
+                </span>
+
+            `;
+
+            popularBox.appendChild(div);
+
+        });
+
+    }
+
+
+    /* =========================================
+       LIVE ORDERS
+    ========================================= */
+
+    const activeRows = rows.filter(row => {
+
+        const status =
+        String(row[6] || "").toLowerCase();
+
+        return (
+            status !== "delivered" &&
+            status !== ""
+        );
+
+    });
+
+
+    /*
+       Group rows by Order ID
+    */
+
+    const orderMap = {};
+
+
+    activeRows.forEach(row => {
+
+        const orderId =
+        String(row[7] || "").trim();
+
+
+        if(!orderId){
+            return;
+        }
+
+
+        if(!orderMap[orderId]){
+
+            orderMap[orderId] = {
+
+                id: orderId,
+
+                time: row[0],
+
+                table: row[1],
+
+                items: [],
+
+                total: 0,
+
+                status: row[6]
+
+            };
+
+        }
+
+
+        orderMap[orderId].items.push({
+
+            name: row[2],
+
+            quantity: row[3]
+
+        });
+
+
+        orderMap[orderId].total +=
+        Number(row[5]) || 0;
+
+
+        orderMap[orderId].status =
+        row[6];
+
+    });
+
+
+    const liveOrders =
+    Object.values(orderMap)
+
+    .sort((a,b) =>
+        new Date(b.time) -
+        new Date(a.time)
+    );
+
+
+    showLiveOrders(liveOrders);
+
+
+    /* =========================================
+       TABLE STATUS
+    ========================================= */
+
+    const activeTableSet = new Set();
+
+
+    activeRows.forEach(row => {
+
+        const table =
+        String(row[1] || "").trim();
+
+        if(table){
+            activeTableSet.add(table);
+        }
+
+    });
+
+
+    document.getElementById("activeTables").innerText =
+    activeTableSet.size + " / 7";
+
+
+    showTables(activeTableSet);
+
+}
+
+
+/* =========================================
+   SHOW LIVE ORDERS
+========================================= */
+
+function showLiveOrders(orders){
+
+    const box =
+    document.getElementById("ordersList");
+
+
+    document.getElementById("liveCount").innerText =
+    orders.length + " Active";
+
+
+    if(orders.length === 0){
+
+        box.innerHTML = `
+            <div class="loading">
+                अभी कोई active order नहीं है।
+            </div>
+        `;
+
+        return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    orders.slice(0,10).forEach(order => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className="order";
+
+
+        const itemsText =
+        order.items
+
+        .map(item =>
+            `${escapeHTML(String(item.name))} × ${item.quantity}`
+        )
+
+        .join(", ");
+
+
+        const status =
+        String(order.status || "New");
+
+
+        let statusClass="status";
+
+
+        if(status.toLowerCase()==="complete"){
+            statusClass="status complete";
+        }
+
+
+        if(status.toLowerCase()==="new"){
+            statusClass="status new";
+        }
+
+
+        div.innerHTML = `
+
+            <div class="order-left">
+
+                <b>
+                    Order #${escapeHTML(order.id)}
+                </b>
+
+                <p>
+                    🪑 Table ${escapeHTML(String(order.table))}
+                    • ${itemsText}
+                </p>
+
+            </div>
+
+
+            <div class="order-right">
+
+                <div class="price">
+                    ₹${order.total.toLocaleString("en-IN")}
+                </div>
+
+                <span class="${statusClass}">
+                    ${escapeHTML(status)}
+                </span>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================
+   TABLE STATUS
+========================================= */
+
+function showTables(activeTables){
+
+    const box =
+    document.getElementById("tablesList");
+
+
+    box.innerHTML="";
+
+
+    for(let i=1;i<=7;i++){
+
+        const occupied =
+        activeTables.has(String(i));
+
+
+        const div =
+        document.createElement("div");
+
+
+        div.className="table";
+
+
+        if(occupied){
+
+            div.innerHTML=`
+
+                <div class="table-number">
+                    ${i}
+                </div>
+
+                <div class="table-status busy">
+                    ● Occupied
+                </div>
+
+            `;
+
+        }else{
+
+            div.innerHTML=`
+
+                <div class="table-number">
+                    ${i}
+                </div>
+
+                <div class="table-status available">
+                    ● Available
+                </div>
+
+            `;
+
+        }
+
+
+        box.appendChild(div);
+
+    }
+
+}
+
+
+/* =========================================
+   EMPTY ORDERS
+========================================= */
+
+function showEmptyOrders(){
+
+    document.getElementById("ordersList").innerHTML=`
+
+        <div class="loading">
+            अभी कोई order नहीं है।
+        </div>
+
+    `;
+
+    document.getElementById("popularItems").innerHTML=`
+
+        <div class="loading">
+            अभी कोई item नहीं बिका।
+        </div>
+
+    `;
+
+    showTables(new Set());
+
+}
+
+
+/* =========================================
+   SECURITY HELPER
+========================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   DATE DISPLAY
+========================================= */
+
+function updateDate(){
+
+    const now = new Date();
+
+
+    const options = {
+
+        weekday:"long",
+
+        year:"numeric",
+
+        month:"long",
+
+        day:"numeric"
+
+    };
+
+
+    document.getElementById("dateText").innerText =
+
+    now.toLocaleDateString(
+        "hi-IN",
+        options
+    );
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+updateDate();
+
+loadDashboard();
+
+
+/*
+   हर 10 सेकंड में Google Sheet
+   से नया data आएगा
+*/
+
+setInterval(loadDashboard,10000);
+
+</script>
+
+</body>
+  </html>
