@@ -1,822 +1,370 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Pratap Palace</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SHRIF CHULA RESTAURANT</title>
 
 <style>
-* {
-    box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    color: #222;
+body{
+    background:#f7f1e8;
+    color:#2b1708;
 }
 
-header {
-    background: #8b0000;
-    color: white;
-    padding: 15px;
-    text-align: center;
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#3b1d08,#7a3e0c);
+    color:white;
+    text-align:center;
+    padding:30px 15px;
 }
 
-header h1 {
-    margin: 5px;
+.logo-circle{
+    width:100px;
+    height:100px;
+    margin:auto;
+    background:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
 }
 
-header p {
-    margin: 5px;
+header h1{
+    font-size:32px;
+    margin-top:15px;
 }
 
-nav {
-    background: #222;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.tagline{
+    margin-top:7px;
+    font-size:14px;
+    letter-spacing:2px;
+    opacity:.9;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 12px 15px;
+/* INFO */
+
+.info{
+    background:white;
+    margin:15px;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 4px 15px #00000012;
 }
 
-nav a:hover {
-    background: #8b0000;
+.info p{
+    margin:8px 0;
+    font-size:15px;
 }
 
-.hero {
-    text-align: center;
-    padding: 40px 15px;
-    background: linear-gradient(135deg, #ffd166, #ff9f1c);
+/* TABLE */
+
+.table-box{
+    margin:15px;
+    background:#fff0c7;
+    border:1px solid #e6c56b;
+    padding:16px;
+    border-radius:15px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
 }
 
-.hero h2 {
-    font-size: 35px;
-    margin: 10px;
+/* WELCOME */
+
+.welcome{
+    text-align:center;
+    padding:20px 15px;
 }
 
-.hero p {
-    font-size: 18px;
+.welcome h2{
+    font-size:25px;
+    margin-bottom:8px;
 }
 
-.big-food {
-    font-size: 90px;
+.welcome p{
+    color:#6d5a4b;
 }
 
-.btn {
-    border: none;
-    background: #8b0000;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+/* ORDER BUTTON */
+
+.order-btn{
+    display:block;
+    width:calc(100% - 30px);
+    margin:10px 15px;
+    padding:16px;
+    background:#e67e22;
+    color:white;
+    border:none;
+    border-radius:13px;
+    font-size:18px;
+    font-weight:bold;
+    box-shadow:0 5px 12px #e67e2250;
 }
 
-.btn:hover {
-    background: #600000;
+.order-btn:active{
+    transform:scale(.98);
 }
 
-section {
-    padding: 30px 15px;
-    max-width: 1000px;
-    margin: auto;
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:15px;
 }
 
-section h2 {
-    text-align: center;
+.feature{
+    background:white;
+    padding:18px 10px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 3px 12px #00000010;
 }
 
-.offer {
-    background: #ffe066;
-    padding: 15px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
+.feature-icon{
+    font-size:30px;
+    margin-bottom:8px;
 }
 
-.search-box {
-    margin: 20px 0;
-    text-align: center;
+.feature b{
+    display:block;
+    margin-bottom:5px;
 }
 
-.search {
-    width: 100%;
-    max-width: 500px;
-    padding: 14px;
-    border: 2px solid #8b0000;
-    border-radius: 8px;
-    font-size: 16px;
+.feature small{
+    color:#777;
 }
 
-#foodList {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
+/* FOOTER */
 
-.food {
-    background: white;
-    border-radius: 12px;
-    padding: 18px;
-    text-align: center;
-    box-shadow: 0 3px 10px #ccc;
-}
-
-.food-image {
-    font-size: 65px;
-}
-
-.food h3 {
-    margin: 8px 0;
-}
-
-.price {
-    color: #8b0000;
-    font-weight: bold;
-    font-size: 19px;
-}
-
-.quantity {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 12px;
-}
-
-.quantity button {
-    width: 38px;
-    height: 38px;
-    border: none;
-    border-radius: 50%;
-    background: #8b0000;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.quantity span {
-    font-size: 20px;
-    font-weight: bold;
-    min-width: 25px;
-}
-
-.cart {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px #ccc;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.total {
-    text-align: right;
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 15px;
-    color: #8b0000;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 13px;
-    margin: 7px 0;
-    border: 1px solid #aaa;
-    border-radius: 7px;
-    font-size: 16px;
-}
-
-textarea {
-    height: 90px;
-}
-
-.order-buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
-
-.info-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 15px;
-    box-shadow: 0 3px 10px #ccc;
-}
-
-.review {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-
-footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
+footer{
+    margin-top:25px;
+    background:#291407;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    line-height:1.8;
 }
 
 /* MOBILE */
-@media (max-width: 600px) {
 
-    header h1 {
-        font-size: 25px;
+@media(max-width:400px){
+
+    header h1{
+        font-size:27px;
     }
 
-    nav a {
-        padding: 10px 8px;
-        font-size: 14px;
+    .features{
+        gap:8px;
     }
 
-    .hero {
-        padding: 25px 10px;
-    }
-
-    .hero h2 {
-        font-size: 27px;
-    }
-
-    .big-food {
-        font-size: 65px;
-    }
-
-    section {
-        padding: 20px 10px;
-    }
-
-    #foodList {
-        grid-template-columns: 1fr;
-    }
-
-    .food {
-        padding: 15px;
-    }
-
-    .order-buttons .btn {
-        width: 100%;
-    }
-
-    .cart-item {
-        font-size: 14px;
-    }
 }
+
 </style>
+
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-    <h1>🏨 Hotel Pratap Palace</h1>
-    <p>📍 Lalganj, Uttar Pradesh</p>
+
+    <div class="logo-circle">
+        🍽️
+    </div>
+
+    <h1>SHRIF CHULA RESTAURANT</h1>
+
+    <div class="tagline">
+        THE TASTE OF TRADITION
+    </div>
+
 </header>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#order">Order</a>
-    <a href="#location">Location</a>
-    <a href="#contact">Contact</a>
-</nav>
 
-<section id="home" class="hero">
-    <div class="big-food">🍕🍔🍜</div>
-    <h2>Welcome to Hotel Pratap Palace</h2>
-    <p>स्वादिष्ट खाना और बेहतरीन सेवा</p>
-    <button class="btn" onclick="goToMenu()">🍽️ Order Now</button>
-</section>
+<!-- DEMO INFO -->
 
-<div class="offer">
-    🎉 आज का Offer: Pizza पर 20% OFF 🎉
+<div class="info">
+
+    <p>🍽️ <b>Restaurant:</b>
+    SHRIF CHULA RESTAURANT</p>
+
+    <p>🕘 <b>Timing:</b>
+    Open for Orders</p>
+
 </div>
 
-<section id="menu">
 
-    <h2>🍽️ Our Menu</h2>
+<!-- TABLE -->
 
-    <div class="search-box">
-        <input
-            class="search"
-            id="searchInput"
-            type="text"
-            placeholder="🔍 Pizza, Burger, Chowmein खोजें..."
-            oninput="searchFood()"
-        >
-    </div>
+<div class="table-box">
 
-    <div id="foodList">
+    🪑 Your Table:
+    <span id="tableNumber">Loading...</span>
 
-        <!-- PIZZA -->
-        <div class="food" data-name="Margherita Pizza">
-            <div class="food-image">🍕</div>
-            <h3>Margherita Pizza</h3>
-            <p class="price">₹120</p>
+</div>
 
-            <div class="quantity">
-                <button onclick="changeQty('Margherita Pizza',120,-1)">−</button>
-                <span id="qty-Margherita-Pizza">0</span>
-                <button onclick="changeQty('Margherita Pizza',120,1)">+</button>
-            </div>
-        </div>
 
-        <div class="food" data-name="Cheese Pizza">
-            <div class="food-image">🍕</div>
-            <h3>Cheese Pizza</h3>
-            <p class="price">₹150</p>
+<!-- WELCOME -->
 
-            <div class="quantity">
-                <button onclick="changeQty('Cheese Pizza',150,-1)">−</button>
-                <span id="qty-Cheese-Pizza">0</span>
-                <button onclick="changeQty('Cheese Pizza',150,1)">+</button>
-            </div>
-        </div>
+<div class="welcome">
 
-        <div class="food" data-name="Paneer Pizza">
-            <div class="food-image">🍕</div>
-            <h3>Paneer Pizza</h3>
-            <p class="price">₹180</p>
+    <h2>🍽️ Welcome!</h2>
 
-            <div class="quantity">
-                <button onclick="changeQty('Paneer Pizza',180,-1)">−</button>
-                <span id="qty-Paneer-Pizza">0</span>
-                <button onclick="changeQty('Paneer Pizza',180,1)">+</button>
-            </div>
-        </div>
+    <p>
+        Fresh food, delicious taste
+        and a traditional experience.
+    </p>
 
-        <div class="food" data-name="Farmhouse Pizza">
-            <div class="food-image">🍕</div>
-            <h3>Farmhouse Pizza</h3>
-            <p class="price">₹200</p>
+</div>
 
-            <div class="quantity">
-                <button onclick="changeQty('Farmhouse Pizza',200,-1)">−</button>
-                <span id="qty-Farmhouse-Pizza">0</span>
-                <button onclick="changeQty('Farmhouse Pizza',200,1)">+</button>
-            </div>
-        </div>
 
-        <!-- BURGER -->
-        <div class="food" data-name="Veg Burger">
-            <div class="food-image">🍔</div>
-            <h3>Veg Burger</h3>
-            <p class="price">₹70</p>
+<!-- ORDER -->
 
-            <div class="quantity">
-                <button onclick="changeQty('Veg Burger',70,-1)">−</button>
-                <span id="qty-Veg-Burger">0</span>
-                <button onclick="changeQty('Veg Burger',70,1)">+</button>
-            </div>
-        </div>
+<button class="order-btn"
+onclick="startOrder()">
 
-        <div class="food" data-name="Cheese Burger">
-            <div class="food-image">🍔</div>
-            <h3>Cheese Burger</h3>
-            <p class="price">₹90</p>
+    🍽️ Order Food
 
-            <div class="quantity">
-                <button onclick="changeQty('Cheese Burger',90,-1)">−</button>
-                <span id="qty-Cheese-Burger">0</span>
-                <button onclick="changeQty('Cheese Burger',90,1)">+</button>
-            </div>
-        </div>
+</button>
 
-        <div class="food" data-name="Paneer Burger">
-            <div class="food-image">🍔</div>
-            <h3>Paneer Burger</h3>
-            <p class="price">₹110</p>
 
-            <div class="quantity">
-                <button onclick="changeQty('Paneer Burger',110,-1)">−</button>
-                <span id="qty-Paneer-Burger">0</span>
-                <button onclick="changeQty('Paneer Burger',110,1)">+</button>
-            </div>
-        </div>
+<!-- FEATURES -->
 
-        <!-- CHOWMEIN -->
-        <div class="food" data-name="Veg Chowmein">
-            <div class="food-image">🍜</div>
-            <h3>Veg Chowmein</h3>
-            <p class="price">₹70</p>
+<div class="features">
 
-            <div class="quantity">
-                <button onclick="changeQty('Veg Chowmein',70,-1)">−</button>
-                <span id="qty-Veg-Chowmein">0</span>
-                <button onclick="changeQty('Veg Chowmein',70,1)">+</button>
-            </div>
-        </div>
+    <div class="feature">
 
-        <div class="food" data-name="Paneer Chowmein">
-            <div class="food-image">🍜</div>
-            <h3>Paneer Chowmein</h3>
-            <p class="price">₹100</p>
+        <div class="feature-icon">📱</div>
 
-            <div class="quantity">
-                <button onclick="changeQty('Paneer Chowmein',100,-1)">−</button>
-                <span id="qty-Paneer-Chowmein">0</span>
-                <button onclick="changeQty('Paneer Chowmein',100,1)">+</button>
-            </div>
-        </div>
+        <b>Easy Ordering</b>
 
-        <div class="food" data-name="Hakka Chowmein">
-            <div class="food-image">🍜</div>
-            <h3>Hakka Chowmein</h3>
-            <p class="price">₹90</p>
-
-            <div class="quantity">
-                <button onclick="changeQty('Hakka Chowmein',90,-1)">−</button>
-                <span id="qty-Hakka-Chowmein">0</span>
-                <button onclick="changeQty('Hakka Chowmein',90,1)">+</button>
-            </div>
-        </div>
-
-        <!-- DRINKS -->
-        <div class="food" data-name="Cold Drink">
-            <div class="food-image">🥤</div>
-            <h3>Cold Drink</h3>
-            <p class="price">₹40</p>
-
-            <div class="quantity">
-                <button onclick="changeQty('Cold Drink',40,-1)">−</button>
-                <span id="qty-Cold-Drink">0</span>
-                <button onclick="changeQty('Cold Drink',40,1)">+</button>
-            </div>
-        </div>
-
-        <div class="food" data-name="Mango Shake">
-            <div class="food-image">🥭</div>
-            <h3>Mango Shake</h3>
-            <p class="price">₹80</p>
-
-            <div class="quantity">
-                <button onclick="changeQty('Mango Shake',80,-1)">−</button>
-                <span id="qty-Mango-Shake">0</span>
-                <button onclick="changeQty('Mango Shake',80,1)">+</button>
-            </div>
-        </div>
-
-        <div class="food" data-name="Cold Coffee">
-            <div class="food-image">☕</div>
-            <h3>Cold Coffee</h3>
-            <p class="price">₹90</p>
-
-            <div class="quantity">
-                <button onclick="changeQty('Cold Coffee',90,-1)">−</button>
-                <span id="qty-Cold-Coffee">0</span>
-                <button onclick="changeQty('Cold Coffee',90,1)">+</button>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section id="order">
-
-    <h2>🛒 Your Order</h2>
-
-    <div class="cart">
-        <div id="cartItems">
-            <p>अभी कोई item नहीं है।</p>
-        </div>
-
-        <div class="total">
-            Total: ₹<span id="totalPrice">0</span>
-        </div>
-    </div>
-
-    <h2>👤 Customer Details</h2>
-
-    <input id="customerName" type="text" placeholder="आपका नाम">
-
-    <input id="customerPhone" type="tel" placeholder="Mobile Number">
-
-    <textarea id="customerAddress" placeholder="पूरा Address"></textarea>
-
-    <div class="order-buttons">
-        <button class="btn" onclick="placeOrder()">
-            ✅ Place Order
-        </button>
-
-        <button class="btn" onclick="sendWhatsApp()">
-            💬 WhatsApp Order
-        </button>
-    </div>
-
-</section>
-
-<section id="location">
-
-    <h2>📍 Location</h2>
-
-    <div class="info-card">
-        <h3>Hotel Pratap Palace</h3>
-        <p>📍 Lalganj, Uttar Pradesh</p>
-
-        <button class="btn" onclick="openMap()">
-            🗺️ Open Google Maps
-        </button>
-    </div>
-
-</section>
-
-<section id="contact">
-
-    <h2>📞 Contact Us</h2>
-
-    <div class="info-card">
-
-        <p>📱 Mobile: अपना नंबर यहाँ डालें</p>
-
-        <button class="btn" onclick="callHotel()">
-            📞 Call Hotel
-        </button>
-
-        <button class="btn" onclick="sendWhatsApp()">
-            💬 WhatsApp
-        </button>
+        <small>
+            Order directly from your table
+        </small>
 
     </div>
 
-</section>
 
-<section id="reviews">
+    <div class="feature">
 
-    <h2>⭐ Customer Reviews</h2>
+        <div class="feature-icon">⚡</div>
 
-    <div class="review">
-        ⭐⭐⭐⭐⭐
-        <p>बहुत अच्छा खाना और अच्छी service!</p>
+        <b>Quick Service</b>
+
+        <small>
+            Fast kitchen processing
+        </small>
+
     </div>
 
-    <div class="review">
-        ⭐⭐⭐⭐⭐
-        <p>Pizza और Chowmein बहुत tasty है।</p>
+
+    <div class="feature">
+
+        <div class="feature-icon">🍔</div>
+
+        <b>Fresh Food</b>
+
+        <small>
+            Delicious food & drinks
+        </small>
+
     </div>
 
-    <div class="review">
-        ⭐⭐⭐⭐
-        <p>अच्छा खाना और reasonable price.</p>
+
+    <div class="feature">
+
+        <div class="feature-icon">⭐</div>
+
+        <b>Your Feedback</b>
+
+        <small>
+            Help us serve you better
+        </small>
+
     </div>
 
-</section>
+</div>
+
+
+<!-- FOOTER -->
 
 <footer>
-    <p>© 2026 Hotel Pratap Palace</p>
-    <p>Lalganj, Uttar Pradesh</p>
+
+    <b>🍽️ SHRIF CHULA RESTAURANT</b>
+
+    <br><br>
+
+    Demo Food Ordering System
+
+    <br>
+
+    © 2026 SHRIF CHULA RESTAURANT
+
 </footer>
 
 
 <script>
 
-let cart = {};
-let total = 0;
+/* TABLE NUMBER */
 
+const params =
+new URLSearchParams(window.location.search);
 
-/* ADD / REMOVE PRODUCT */
-function changeQty(item, price, change) {
+const table =
+params.get("table");
 
-    if (!cart[item]) {
-        cart[item] = {
-            price: price,
-            qty: 0
-        };
-    }
+if(table >= 1 && table <= 10){
 
-    cart[item].qty += change;
+    document.getElementById("tableNumber")
+    .textContent = "Table " + table;
 
-    if (cart[item].qty < 0) {
-        cart[item].qty = 0;
-    }
+}else{
 
-    let id = "qty-" + item.replaceAll(" ", "-");
+    document.getElementById("tableNumber")
+    .textContent = "Not Selected";
 
-    document.getElementById(id).innerText = cart[item].qty;
-
-    updateCart();
 }
 
 
-/* CART UPDATE */
-function updateCart() {
+/* ORDER BUTTON */
 
-    let cartItems = document.getElementById("cartItems");
+function startOrder(){
 
-    cartItems.innerHTML = "";
+    if(table >= 1 && table <= 10){
 
-    total = 0;
+        window.location.href =
+        "menu.html?table=" + table;
 
-    let hasItem = false;
+    }else{
 
-    for (let item in cart) {
+        alert(
+            "Please open this website using your table QR code."
+        );
 
-        if (cart[item].qty > 0) {
-
-            hasItem = true;
-
-            let itemTotal = cart[item].price * cart[item].qty;
-
-            total += itemTotal;
-
-            let div = document.createElement("div");
-
-            div.className = "cart-item";
-
-            div.innerHTML =
-                "<span>" +
-                item +
-                " × " +
-                cart[item].qty +
-                "</span>" +
-                "<b>₹" +
-                itemTotal +
-                "</b>";
-
-            cartItems.appendChild(div);
-        }
     }
 
-    if (!hasItem) {
-
-        cartItems.innerHTML =
-            "<p>अभी कोई item नहीं है।</p>";
-    }
-
-    document.getElementById("totalPrice").innerText = total;
-}
-
-
-/* SEARCH */
-function searchFood() {
-
-    let searchText =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    let foods =
-        document.querySelectorAll(".food");
-
-    foods.forEach(function(food) {
-
-        let name =
-            food.getAttribute("data-name")
-            .toLowerCase();
-
-        if (name.includes(searchText)) {
-            food.style.display = "";
-        } else {
-            food.style.display = "none";
-        }
-
-    });
-}
-
-
-/* ORDER NOW */
-function goToMenu() {
-
-    document.getElementById("menu")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-}
-
-
-/* PLACE ORDER */
-function placeOrder() {
-
-    if (total === 0) {
-
-        alert("पहले कोई food item add करें!");
-
-        return;
-    }
-
-    let name =
-        document.getElementById("customerName").value.trim();
-
-    let phone =
-        document.getElementById("customerPhone").value.trim();
-
-    let address =
-        document.getElementById("customerAddress").value.trim();
-
-    if (name === "" || phone === "" || address === "") {
-
-        alert("कृपया Name, Mobile और Address भरें!");
-
-        return;
-    }
-
-    alert(
-        "Order successfully placed!\n\n" +
-        "Name: " + name +
-        "\nTotal: ₹" + total
-    );
-}
-
-
-/* WHATSAPP ORDER */
-function sendWhatsApp() {
-
-    if (total === 0) {
-
-        alert("पहले कोई food item add करें!");
-
-        return;
-    }
-
-    let name =
-        document.getElementById("customerName").value.trim();
-
-    let phone =
-        document.getElementById("customerPhone").value.trim();
-
-    let address =
-        document.getElementById("customerAddress").value.trim();
-
-    if (name === "" || phone === "" || address === "") {
-
-        alert("पहले अपना Name, Mobile और Address भरें!");
-
-        return;
-    }
-
-    let message =
-        "🍽️ Hotel Pratap Palace Order\n\n";
-
-    message += "Name: " + name + "\n";
-    message += "Mobile: " + phone + "\n";
-    message += "Address: " + address + "\n\n";
-
-    message += "Order:\n";
-
-    for (let item in cart) {
-
-        if (cart[item].qty > 0) {
-
-            message +=
-                item +
-                " × " +
-                cart[item].qty +
-                " = ₹" +
-                (cart[item].price * cart[item].qty) +
-                "\n";
-        }
-    }
-
-    message += "\nTotal: ₹" + total;
-
-    /*
-       अपना WhatsApp number यहाँ डालना।
-       Example:
-       919876543210
-    */
-
-    let hotelNumber = "919XXXXXXXXX";
-
-    let url =
-        "https://wa.me/" +
-        hotelNumber +
-        "?text=" +
-        encodeURIComponent(message);
-
-    window.open(url, "_blank");
-}
-
-
-/* GOOGLE MAP */
-function openMap() {
-
-    window.open(
-        "https://www.google.com/maps/search/?api=1&query=Lalganj,Uttar Pradesh",
-        "_blank"
-    );
-}
-
-
-/* CALL */
-function callHotel() {
-
-    window.location.href = "tel:+919XXXXXXXXX";
 }
 
 </script>
+
 
 </body>
 </html>
