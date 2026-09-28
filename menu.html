@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SHRIF CHULA RESTAURANT - Menu</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif
+}
+
+body{
+    background:#f7f1e8;
+    color:#2b1708;
+    padding-bottom:90px
+}
+
+header{
+    background:linear-gradient(135deg,#3b1d08,#7a3e0c);
+    color:white;
+    text-align:center;
+    padding:22px 15px
+}
+
+header h1{
+    font-size:28px
+}
+
+header p{
+    margin-top:6px;
+    font-size:13px;
+    letter-spacing:1px
+}
+
+.table-box{
+    background:#fff0c7;
+    padding:13px;
+    text-align:center;
+    font-weight:bold
+}
+
+.search{
+    padding:12px;
+    background:white
+}
+
+.search input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:12px;
+    background:white
+}
+
+.categories button{
+    border:none;
+    background:#eee;
+    padding:9px 14px;
+    border-radius:20px;
+    white-space:nowrap
+}
+
+.categories button.active{
+    background:#5b2c06;
+    color:white
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:10px
+}
+
+.category-title{
+    color:#5b2c06;
+    margin:18px 0 10px;
+    font-size:22px
+}
+
+.item{
+    background:white;
+    margin-bottom:10px;
+    padding:14px;
+    border-radius:13px;
+    box-shadow:0 3px 12px #00000012
+}
+
+.item-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px
+}
+
+.item-name{
+    font-weight:bold;
+    font-size:16px
+}
+
+.price{
+    color:#7a3e0c;
+    font-weight:bold;
+    text-align:right
+}
+
+.options{
+    display:flex;
+    gap:8px;
+    margin-top:10px
+}
+
+.option{
+    flex:1;
+    padding:9px;
+    border:1px solid #ccc;
+    background:#fafafa;
+    border-radius:8px
+}
+
+.option.selected{
+    background:#5b2c06;
+    color:white
+}
+
+.add-btn{
+    width:100%;
+    margin-top:10px;
+    padding:11px;
+    border:none;
+    border-radius:8px;
+    background:#e67e22;
+    color:white;
+    font-size:15px;
+    font-weight:bold
+}
+
+.cart-bar{
+    position:fixed;
+    bottom:12px;
+    left:10px;
+    right:10px;
+    max-width:680px;
+    margin:auto;
+    background:#5b2c06;
+    color:white;
+    padding:13px 15px;
+    border-radius:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 5px 20px #0005;
+    z-index:20
+}
+
+.cart-bar button{
+    background:#e67e22;
+    border:none;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    font-weight:bold
+}
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:50;
+    align-items:flex-end
+}
+
+.cart-panel{
+    background:white;
+    width:100%;
+    max-height:85vh;
+    overflow:auto;
+    border-radius:20px 20px 0 0;
+    padding:20px
+}
+
+.cart-panel h2{
+    color:#5b2c06;
+    margin-bottom:15px
+}
+
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:12px 0
+}
+
+.cart-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:8px
+}
+
+.qty button{
+    width:34px;
+    height:34px;
+    border:none;
+    background:#5b2c06;
+    color:white;
+    border-radius:6px
+}
+
+.total{
+    font-size:21px;
+    font-weight:bold;
+    margin:18px 0
+}
+
+.order-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#27ae60;
+    color:white;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold
+}
+
+.close-btn{
+    width:100%;
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    background:#ddd;
+    border-radius:10px
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#777
+}
+
+.track-box{
+    display:none;
+    background:white;
+    margin:15px 10px;
+    padding:18px;
+    border-radius:13px;
+    box-shadow:0 3px 12px #00000012;
+    text-align:center
+}
+
+.track-box h3{
+    color:#5b2c06;
+    margin-bottom:8px
+}
+
+.track-id{
+    font-weight:bold;
+    color:#7a3e0c;
+    margin-bottom:12px;
+    word-break:break-all
+}
+
+.copy-btn{
+    border:none;
+    background:#e67e22;
+    color:white;
+    padding:8px 12px;
+    border-radius:7px;
+    font-weight:bold;
+    margin-left:6px
+}
+
+.track-btn{
+    display:block;
+    width:100%;
+    padding:13px;
+    background:#3498db;
+    color:white;
+    text-decoration:none;
+    border-radius:9px;
+    font-weight:bold;
+    margin-top:10px
+}
+
+.review-box{
+    display:none;
+    background:#fff0c7;
+    margin:15px 10px;
+    padding:18px;
+    border-radius:13px;
+    text-align:center
+}
+
+.review-box h3{
+    color:#5b2c06;
+    margin-bottom:8px
+}
+
+.review-btn{
+    display:block;
+    width:100%;
+    padding:13px;
+    background:#27ae60;
+    color:white;
+    text-decoration:none;
+    border-radius:9px;
+    font-weight:bold
+}
+
+.no-thanks{
+    width:100%;
+    margin-top:8px;
+    padding:11px;
+    border:none;
+    background:#ddd;
+    border-radius:9px;
+    font-weight:bold
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>🍽️ SHRIF CHULA RESTAURANT</h1>
+
+<p>🍽️ FOOD MENU</p>
+
+</header>
+
+
+<div class="table-box">
+
+🪑 Your Table:
+
+<span id="tableNumber">--</span>
+
+</div>
+
+
+<div class="track-box" id="trackBox">
+
+<h3>📦 Your Order</h3>
+
+<div class="track-id">
+
+<span id="trackOrderId"></span>
+
+<button
+class="copy-btn"
+onclick="copyOrderId()">
+
+📋 Copy
+
+</button>
+
+</div>
+
+
+<a
+id="trackButton"
+class="track-btn"
+href="#">
+
+🔍 Track Order Status
+
+</a>
+
+</div>
+
+
+<!-- DEMO REVIEW BOX -->
+
+<div class="review-box" id="reviewBox">
+
+<h3>⭐ अपना अनुभव बताएं</h3>
+
+<p style="margin-bottom:12px">
+
+Your feedback helps us serve you better.
+
+</p>
+
+<button
+class="no-thanks"
+onclick="closeReview()">
+
+Close
+
+</button>
+
+</div>
+
+
+<div class="search">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Search food...">
+
+</div>
+
+
+<div
+class="categories"
+id="categories">
+</div>
+
+
+<div
+class="container"
+id="menu">
+</div>
+
+
+<div class="cart-bar">
+
+<div>
+
+🛒 <span id="cartCount">0</span> Items
+
+<br>
+
+₹<span id="cartTotal">0</span>
+
+</div>
+
+<button onclick="openCart()">
+
+View Cart
+
+</button>
+
+</div>
+
+
+<div
+class="overlay"
+id="cartOverlay">
+
+<div class="cart-panel">
+
+<h2>🛒 Your Order</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+
+Total: ₹<span id="panelTotal">0</span>
+
+</div>
+
+
+<button
+class="order-btn"
+id="placeOrderButton"
+onclick="placeOrder()">
+
+✅ Place Order
+
+</button>
+
+
+<button
+class="close-btn"
+onclick="closeCart()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/*
+=========================================
+DEMO BACKEND
+=========================================
+
+Original ITI Chai Wala backend
+intentionally removed.
+
+New DEMO Google Apps Script URL
+will be added later.
+*/
+
+const BACKEND_URL =
+"PASTE_DEMO_BACKEND_URL_HERE";
+
+
+const params =
+new URLSearchParams(window.location.search);
+
+const table =
+Number(params.get("table"));
+
+
+if(table>=1 && table<=10){
+
+document.getElementById("tableNumber")
+.textContent="Table "+table;
+
+}else{
+
+document.getElementById("tableNumber")
+.textContent="Not Selected";
+
+}
+
+
+/* MENU */
+
+const menuData=[
+
+{
+category:"COFFEE",
+items:[
+["Chai",20],
+["Coldrink",30],
+["Hot Coffee",40],
+["Cold Coffee",70],
+["Cold Coffee With Icecream",80]
+]
+},
+
+{
+category:"SHAKE",
+items:[
+["Banana Shake",60],
+["Oreo Shake",70],
+["Chocolate Shake",70],
+["Kit-Kat Shake",70],
+["Vanilla Shake",70],
+["Butter Scotch Shake",70]
+]
+},
+
+{
+category:"NOODLES",
+items:[
+["Veg Noodles",{Half:70,Full:110}],
+["Hakka Noodles",{Half:80,Full:130}],
+["Chilly Garlic Noodles",{Half:80,Full:130}],
+["Shezwan Noodles",{Half:80,Full:130}],
+["Paneer Noodles",{Half:90,Full:150}]
+]
+},
+
+{
+category:"BURGER",
+items:[
+["Bun Makkhan",40],
+["Veg Burger",60],
+["Paneer Burger",70],
+["Cheese Burger",70],
+["Double Cheese Burger",80],
+["Special Burger",80]
+]
+},
+
+{
+category:"FINGER",
+items:[
+["French Fries",60],
+["Spring Roll",60],
+["Chilly Potato",{Half:90,Full:150}],
+["Honey Chilly Potato",{Half:100,Full:170}]
+]
+},
+
+{
+category:"MOMOS",
+items:[
+["Steam Momos",60],
+["Fry Momos",70],
+["Chilly Momos",80]
+]
+},
+
+{
+category:"SANDWICH",
+items:[
+["Veg Grill Sandwich",60],
+["Tikki Grill Sandwich",60],
+["Paneer Sandwich",70],
+["Cheese Sandwich",70],
+["Peanut Butter Sandwich",60],
+["Cheese Corn Sandwich",80],
+["Double Cheese Sandwich",80],
+["Special Sandwich",90]
+]
+},
+
+{
+category:"PASTA",
+items:[
+["Veg Pasta",70],
+["Red Sauce Pasta",90],
+["White Sauce Pasta",110]
+]
+},
+
+{
+category:"SOUP",
+items:[
+["Veg Soup",60],
+["Sweet Corn Soup",60],
+["Manchow Soup",70],
+["Hot & Sour Soup",80]
+]
+},
+
+{
+category:"PATTIES",
+items:[
+["Aalu Patties",20],
+["Paneer Patties",30],
+["Special Patties",40]
+]
+},
+
+{
+category:"MAGGI",
+items:[
+["Veg Maggi",60],
+["Paneer Maggi",70],
+["Cheese Maggi",70],
+["Butter Maggi",70],
+["Shezwan Maggi",70],
+["Double Masala Maggi",70],
+["Sweet Corn Maggi",80],
+["Special Maggi",80]
+]
+},
+
+{
+category:"RICE",
+items:[
+["Zeera Rice",60],
+["Fried Rice",70],
+["Shezwan Fried Rice",70],
+["Chilly Garlic Fried Rice",80],
+["Paneer Fried Rice",90]
+]
+},
+
+{
+category:"WATER",
+items:[
+["Water Bottle",{Small:10,Big:20}]
+]
+}
+
+];
+
+
+let cart=[];
+
+
+function createCategories(){
+
+const box =
+document.getElementById("categories");
+
+box.innerHTML=
+`<button
+class="active"
+onclick="showCategory('ALL',this)">
+All
+</button>`;
+
+
+menuData.forEach(section=>{
+
+box.innerHTML+=
+`<button
+onclick="showCategory('${section.category}',this)">
+${section.category}
+</button>`;
+
+});
+
+}
+
+
+function displayMenu(
+filter="ALL",
+searchText=""
+){
+
+const menu =
+document.getElementById("menu");
+
+menu.innerHTML="";
+
+
+menuData.forEach(section=>{
+
+if(
+filter!=="ALL" &&
+filter!==section.category
+)return;
+
+
+let items =
+section.items.filter(item=>
+item[0]
+.toLowerCase()
+.includes(
+searchText.toLowerCase()
+)
+);
+
+
+if(items.length===0)return;
+
+
+menu.innerHTML+=
+`<h2 class="category-title">
+${section.category}
+</h2>`;
+
+
+items.forEach(item=>{
+
+const name=item[0],
+price=item[1];
+
+
+let html=
+`<div class="item">
+
+<div class="item-top">
+
+<div class="item-name">
+${name}
+</div>
+
+<div class="price">
+
+${
+typeof price==="object"
+
+?
+
+(
+price.Half!==undefined
+
+?
+
+`Half ₹${price.Half}<br>
+Full ₹${price.Full}`
+
+:
+
+`Small ₹${price.Small}<br>
+Big ₹${price.Big}`
+)
+
+:
+
+`₹${price}`
+
+}
+
+</div>
+
+</div>`;
+
+
+if(typeof price==="object"){
+
+
+if(price.Half!==undefined){
+
+html+=`
+
+<div class="options">
+
+<button
+class="option selected"
+onclick="selectOption(this,'Half')">
+
+Half ₹${price.Half}
+
+</button>
+
+<button
+class="option"
+onclick="selectOption(this,'Full')">
+
+Full ₹${price.Full}
+
+</button>
+
+</div>
+
+
+<button
+class="add-btn"
+onclick="addItem('${name}',${price.Half},'Half')">
+
++ Add Half ₹${price.Half}
+
+</button>`;
+
+}else{
+
+html+=`
+
+<div class="options">
+
+<button
+class="option selected"
+onclick="selectOption(this,'Small')">
+
+Small ₹${price.Small}
+
+</button>
+
+<button
+class="option"
+onclick="selectOption(this,'Big')">
+
+Big ₹${price.Big}
+
+</button>
+
+</div>
+
+
+<button
+class="add-btn"
+onclick="addItem('${name}',${price.Small},'Small')">
+
++ Add Small ₹${price.Small}
+
+</button>`;
+
+}
+
+
+}else{
+
+html+=`
+
+<button
+class="add-btn"
+onclick="addItem('${name}',${price},'')">
+
++ Add ₹${price}
+
+</button>`;
+
+}
+
+
+html+=`</div>`;
+
+menu.innerHTML+=html;
+
+});
+
+});
+
+}
+
+
+function selectOption(button,type){
+
+const parent =
+button.parentElement;
+
+
+parent
+.querySelectorAll(".option")
+.forEach(btn=>
+btn.classList.remove("selected")
+);
+
+
+button.classList.add("selected");
+
+
+const addButton =
+parent.nextElementSibling;
+
+const card =
+parent.parentElement;
+
+
+const name =
+card
+.querySelector(".item-name")
+.textContent
+.trim();
+
+
+const price =
+Number(
+button
+.textContent
+.replace(/[^0-9]/g,"")
+);
+
+
+addButton.setAttribute(
+"onclick",
+`addItem('${name}',${price},'${type}')`
+);
+
+
+addButton.textContent =
+`+ Add ${type} ₹${price}`;
+
+}
+
+
+function addItem(
+name,
+price,
+size
+){
+
+const key =
+name+"|"+size;
+
+
+const existing =
+cart.find(
+item=>item.key===key
+);
+
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+
+key:key,
+
+name:name,
+
+price:Number(price),
+
+qty:1,
+
+size:size
+
+});
+
+}
+
+
+updateCart();
+
+}
+
+
+function updateCart(){
+
+let count=0,
+total=0;
+
+
+cart.forEach(item=>{
+
+count+=item.qty;
+
+total+=
+item.price*item.qty;
+
+});
+
+
+document
+.getElementById("cartCount")
+.textContent=count;
+
+
+document
+.getElementById("cartTotal")
+.textContent=total;
+
+
+document
+.getElementById("panelTotal")
+.textContent=total;
+
+
+renderCart();
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cartItems");
+
+
+if(cart.length===0){
+
+box.innerHTML=`
+
+<div class="empty">
+
+🛒 Your cart is empty.
+
+<br><br>
+
+Food add karke order karein.
+
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+cart.forEach(
+(item,index)=>{
+
+const subtotal =
+item.price*item.qty;
+
+
+box.innerHTML+=`
+
+<div class="cart-item">
+
+<div class="cart-row">
+
+<div>
+
+<b>${item.name}</b>
+
+${
+item.size
+?
+`<br><small>${item.size}</small>`
+:""
+}
+
+<br>
+
+₹${item.price} × ${item.qty}
+
+</div>
+
+<b>₹${subtotal}</b>
+
+</div>
+
+
+<div class="qty">
+
+<button
+onclick="changeQty(${index},-1)">
+−
+</button>
+
+<b>${item.qty}</b>
+
+<button
+onclick="changeQty(${index},1)">
++
+</button>
+
+</div>
+
+</div>`;
+
+});
+
+}
+
+
+function changeQty(
+index,
+change
+){
+
+cart[index].qty+=change;
+
+
+if(cart[index].qty<=0){
+
+cart.splice(index,1);
+
+}
+
+
+updateCart();
+
+}
+
+
+function openCart(){
+
+document
+.getElementById("cartOverlay")
+.style.display="flex";
+
+}
+
+
+function closeCart(){
+
+document
+.getElementById("cartOverlay")
+.style.display="none";
+
+}
+
+
+document
+.getElementById("search")
+.addEventListener(
+"input",
+function(){
+
+displayMenu(
+"ALL",
+this.value
+);
+
+});
+
+
+function showCategory(
+category,
+button
+){
+
+document
+.querySelectorAll(
+".categories button"
+)
+.forEach(
+btn=>
+btn.classList.remove("active")
+);
+
+
+button.classList.add("active");
+
+
+displayMenu(
+category,
+document.getElementById("search").value
+);
+
+}
+
+
+/* COPY ORDER ID */
+
+function copyOrderId(){
+
+const orderId =
+document
+.getElementById("trackOrderId")
+.textContent
+.replace("Order ID: ","")
+.trim();
+
+
+if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(orderId)
+.then(()=>{
+
+alert(
+"✅ Order ID copy ho gayi!"
+);
+
+})
+.catch(()=>{
+
+alert(
+"❌ Copy नहीं हो सकी।"
+);
+
+});
+
+}else{
+
+const textArea =
+document.createElement("textarea");
+
+textArea.value=orderId;
+
+document.body
+.appendChild(textArea);
+
+textArea.select();
+
+document.execCommand("copy");
+
+textArea.remove();
+
+alert(
+"✅ Order ID copy ho gayi!"
+);
+
+}
+
+}
+
+
+/* DEMO REVIEW */
+
+function closeReview(){
+
+document
+.getElementById("reviewBox")
+.style.display="none";
+
+}
+
+
+/* PLACE ORDER */
+
+async function placeOrder(){
+
+if(!(table>=1&&table<=10)){
+
+alert(
+"⚠️ Table number नहीं मिला। कृपया सही table QR scan करें।"
+);
+
+return;
+
+}
+
+
+if(cart.length===0){
+
+alert(
+"🛒 पहले cart में food add करें।"
+);
+
+return;
+
+}
+
+
+if(
+BACKEND_URL===
+"PASTE_DEMO_BACKEND_URL_HERE"
+){
+
+alert(
+"⚠️ Demo backend अभी connect नहीं है।"
+);
+
+return;
+
+}
+
+
+const button =
+document.getElementById(
+"placeOrderButton"
+);
+
+
+button.disabled=true;
+
+button.textContent=
+"⏳ Order भेजा जा रहा है...";
+
+
+const orderData={
+
+action:"newOrder",
+
+table:table,
+
+items:
+cart.map(item=>({
+
+name:item.name,
+
+price:item.price,
+
+qty:item.qty,
+
+size:item.size
+
+}))
+
+};
+
+
+try{
+
+const response =
+await fetch(
+
+BACKEND_URL,
+
+{
+
+method:"POST",
+
+body:
+JSON.stringify(orderData)
+
+}
+
+);
+
+
+const result =
+await response.json();
+
+
+if(result.success){
+
+const orderId =
+result.orderId;
+
+
+document
+.getElementById("trackOrderId")
+.innerText=
+"Order ID: "+orderId;
+
+
+document
+.getElementById("trackButton")
+.href=
+"order-status-demo.html?order="+
+encodeURIComponent(orderId);
+
+
+document
+.getElementById("trackBox")
+.style.display="block";
+
+
+alert(
+
+"✅ आपका order successfully भेज दिया गया!\n\n"+
+"Order ID: "+
+orderId+
+"\n\nऊपर Track Order से अपना order status देख सकते हैं।"
+
+);
+
+
+cart=[];
+
+updateCart();
+
+closeCart();
+
+
+}else{
+
+alert(
+"❌ Order नहीं गया। कृपया दोबारा कोशिश करें।"
+);
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Internet या server में समस्या है।"
+);
+
+}finally{
+
+button.disabled=false;
+
+button.textContent=
+"✅ Place Order";
+
+}
+
+}
+
+
+/* START */
+
+createCategories();
+
+displayMenu();
+
+updateCart();
+
+
+</script>
+
+</body>
+</html>
