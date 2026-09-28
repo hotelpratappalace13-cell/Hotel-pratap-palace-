@@ -1,224 +1,1634 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kitchen Orders</title>
+<title>SHRIF CHULA RESTAURANT - Kitchen</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    margin: 0;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-header {
-    background: #8b0000;
-    color: white;
-    text-align: center;
-    padding: 20px;
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    color:#222;
 }
 
-.order {
-    background: white;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px #ccc;
+header{
+    background:#6b2f13;
+    color:white;
+    text-align:center;
+    padding:20px 10px;
 }
 
-.order h2 {
-    margin-top: 0;
+header h1{
+    font-size:25px;
 }
 
-.status {
-    font-weight: bold;
-    margin: 10px 0;
+header p{
+    margin-top:6px;
+    font-size:14px;
 }
 
-select {
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: 6px;
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:15px;
 }
 
-#message {
-    text-align: center;
-    padding: 15px;
-    font-weight: bold;
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    gap:10px;
 }
+
+.count{
+    font-weight:bold;
+}
+
+.top-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.refresh,
+.sound{
+    border:none;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.refresh{
+    background:#e67e22;
+}
+
+.sound{
+    background:#27ae60;
+}
+
+.order{
+    background:white;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.order.new{
+    border-left:6px solid #e67e22;
+}
+
+.order.preparing{
+    border-left:6px solid #3498db;
+}
+
+.order.complete{
+    border-left:6px solid #27ae60;
+}
+
+.order.delivered{
+    border-left:6px solid #777;
+}
+
+.order-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.table{
+    font-size:20px;
+    font-weight:bold;
+    color:#8b4513;
+}
+
+.time{
+    font-size:12px;
+    color:#777;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.total{
+    text-align:right;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:12px;
+}
+
+.status{
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.buttons button{
+    border:none;
+    padding:10px 12px;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+}
+
+.prepare{
+    background:#3498db;
+}
+
+.complete{
+    background:#27ae60;
+}
+
+.delivered{
+    background:#555;
+}
+
+.delete{
+    background:#c0392b;
+}
+
+.empty{
+    background:white;
+    padding:30px;
+    text-align:center;
+    border-radius:12px;
+    color:#777;
+}
+
+
+/* NEW ORDER NOTIFICATION */
+
+.notification-box{
+    display:none;
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:92%;
+    max-width:420px;
+    background:#fff;
+    border:3px solid #e67e22;
+    border-radius:15px;
+    padding:15px;
+    z-index:9999;
+    box-shadow:0 5px 25px rgba(0,0,0,.3);
+}
+
+.notification-box.show{
+    display:block;
+}
+
+.notification-title{
+    font-size:20px;
+    font-weight:bold;
+    color:#c45d00;
+}
+
+.notification-text{
+    margin-top:6px;
+    font-size:15px;
+    color:#444;
+    white-space:pre-line;
+}
+
+.notification-close{
+    margin-top:10px;
+    border:none;
+    background:#e67e22;
+    color:white;
+    padding:8px 12px;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+
+/* SOUND STATUS */
+
+.sound-status{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:13px;
+    color:#555;
+}
+
+
+/* CONNECTION STATUS */
+
+.connection-status{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:13px;
+    color:#777;
+}
+
+.connection-status.retrying{
+    color:#e67e22;
+    font-weight:bold;
+}
+
+.connection-status.online{
+    color:#27ae60;
+}
+
+
+@media(max-width:500px){
+
+    .topbar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .top-buttons{
+        width:100%;
+    }
+
+    .top-buttons button{
+        flex:1;
+    }
+
+    .order-head{
+        flex-direction:column;
+    }
+
+    .buttons button{
+        flex:1;
+        min-width:120px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>👨‍🍳 Kitchen Dashboard</h1>
-    <p>Hotel Pratap Palace</p>
+
+    <h1>🍳 SHRIF CHULA RESTAURANT</h1>
+
+    <p>Kitchen Order Panel</p>
+
 </header>
 
-<div id="message">
-    ⏳ Orders loading...
+
+<!-- NEW ORDER NOTIFICATION -->
+
+<div id="notificationBox" class="notification-box">
+
+    <div class="notification-title">
+        🔔 NEW ORDER!
+    </div>
+
+    <div id="notificationText" class="notification-text">
+        🆕 New Order Arrive
+    </div>
+
+    <button
+        class="notification-close"
+        onclick="closeNotification()">
+
+        OK
+
+    </button>
+
 </div>
 
-<div id="orders"></div>
+
+<div class="container">
+
+
+    <div class="topbar">
+
+        <div class="count" id="orderCount">
+            Orders: 0
+        </div>
+
+
+        <div class="top-buttons">
+
+            <button
+                class="sound"
+                id="soundButton"
+                onclick="enableSound()">
+
+                🔊 Enable Sound
+
+            </button>
+
+
+            <button
+                class="refresh"
+                onclick="loadOrders()">
+
+                🔄 Refresh
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="soundStatus"
+        class="sound-status">
+
+        🔇 Sound is OFF — Enable Sound दबाएं
+
+    </div>
+
+
+    <div
+        id="connectionStatus"
+        class="connection-status">
+
+        🟢 Connecting...
+
+    </div>
+
+
+    <div id="orders">
+
+        <div class="empty">
+            Loading orders...
+        </div>
+
+    </div>
+
+</div>
+
 
 <script>
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycby37fULojmJ1NXQjokAMsbESNBdAPkLePESktR6v9S9vApO_tZK3ykd7XsURnXMLdi4/exec";
+
+/*
+==================================================
+DEMO BACKEND
+==================================================
+
+अभी पुराने personal Google Apps Script URL को
+जानबूझकर यहां नहीं रखा गया है।
+
+बाद में DEMO के लिए नया Google Apps Script URL
+यहां लगाया जाएगा।
+*/
+
+const BACKEND_URL =
+"PASTE_DEMO_BACKEND_URL_HERE";
 
 
-function loadOrders() {
+let allOrders = [];
 
-    fetch(SCRIPT_URL)
+let previousOrderIds = [];
 
-    .then(response => response.json())
+let firstLoad = true;
 
-    .then(data => {
 
-        const orders = document.getElementById("orders");
+/* RETRY VARIABLES */
 
-        orders.innerHTML = "";
+let retryTimer = null;
 
-        if (data.length <= 1) {
-            document.getElementById("message").textContent =
-                "📭 अभी कोई order नहीं है।";
+let isLoading = false;
+
+let retryCount = 0;
+
+const MAX_RETRY_DELAY = 10000;
+
+
+/* SOUND VARIABLES */
+
+let audioContext = null;
+
+let soundEnabled = false;
+
+
+/* NOTIFICATION PERMISSION */
+
+if("Notification" in window){
+
+    Notification.requestPermission()
+    .then(permission=>{
+
+        console.log(
+            "Notification permission:",
+            permission
+        );
+
+    })
+    .catch(error=>{
+
+        console.log(error);
+
+    });
+
+}
+
+
+/* CONNECTION STATUS */
+
+function setConnectionStatus(
+    message,
+    type=""
+){
+
+    const status =
+    document.getElementById(
+        "connectionStatus"
+    );
+
+    status.innerText =
+    message;
+
+    status.className =
+    "connection-status " +
+    type;
+
+}
+
+
+/* ENABLE SOUND */
+
+function enableSound(){
+
+    try{
+
+        const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+
+        if(!AudioContext){
+
+            alert(
+                "इस browser में sound support नहीं है।"
+            );
+
             return;
+
         }
 
-        document.getElementById("message").textContent =
-            "✅ Orders loaded";
 
-        /* Header row हटाकर बाकी rows */
-        for (let i = 1; i < data.length; i++) {
+        if(!audioContext){
 
-            const row = data[i];
+            audioContext =
+            new AudioContext();
 
-            const time = row[0];
-            const table = row[1];
-            const item = row[2];
-            const quantity = row[3];
-            const price = row[4];
-            const total = row[5];
-            const status = row[6];
+        }
 
-            const orderBox =
-                document.createElement("div");
 
-            orderBox.className = "order";
+        if(
+            audioContext.state ===
+            "suspended"
+        ){
 
-            orderBox.innerHTML = `
-                <h2>🪑 Table ${table}</h2>
+            audioContext.resume();
 
-                <p><b>🕐 Time:</b> ${time}</p>
+        }
 
-                <p><b>🍽️ Item:</b> ${item}</p>
 
-                <p><b>🔢 Quantity:</b> ${quantity}</p>
+        soundEnabled = true;
 
-                <p><b>💰 Price:</b> ₹${price}</p>
 
-                <p><b>💵 Total:</b> ₹${total}</p>
+        document.getElementById(
+            "soundButton"
+        ).innerText =
+        "🔊 Sound ON";
 
-                <div class="status">
-                    Status:
+
+        document.getElementById(
+            "soundStatus"
+        ).innerText =
+        "🔊 Sound is ON — New Order पर sound आएगी";
+
+
+        playTestSound();
+
+
+    }catch(error){
+
+        console.log(error);
+
+        alert(
+            "Sound enable नहीं हुआ।"
+        );
+
+    }
+
+}
+
+
+/* TEST SOUND */
+
+function playTestSound(){
+
+    if(!audioContext){
+        return;
+    }
+
+
+    try{
+
+        const oscillator =
+        audioContext.createOscillator();
+
+
+        const gain =
+        audioContext.createGain();
+
+
+        oscillator.type =
+        "sine";
+
+
+        oscillator.frequency.setValueAtTime(
+            900,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.8,
+            audioContext.currentTime
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            audioContext.currentTime +
+            0.5
+        );
+
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+/* NEW ORDER SOUND */
+
+function playNotificationSound(){
+
+    if(
+        !soundEnabled ||
+        !audioContext
+    ){
+
+        console.log(
+            "Sound is not enabled."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const oscillator1 =
+        audioContext.createOscillator();
+
+        const gain1 =
+        audioContext.createGain();
+
+
+        oscillator1.type =
+        "sine";
+
+
+        oscillator1.frequency.setValueAtTime(
+            900,
+            audioContext.currentTime
+        );
+
+
+        gain1.gain.setValueAtTime(
+            0.8,
+            audioContext.currentTime
+        );
+
+
+        oscillator1.connect(gain1);
+
+        gain1.connect(
+            audioContext.destination
+        );
+
+
+        oscillator1.start();
+
+
+        oscillator1.stop(
+            audioContext.currentTime +
+            0.35
+        );
+
+
+        setTimeout(()=>{
+
+            try{
+
+                if(!audioContext){
+                    return;
+                }
+
+
+                const oscillator2 =
+                audioContext.createOscillator();
+
+                const gain2 =
+                audioContext.createGain();
+
+
+                oscillator2.type =
+                "sine";
+
+
+                oscillator2.frequency.setValueAtTime(
+                    1200,
+                    audioContext.currentTime
+                );
+
+
+                gain2.gain.setValueAtTime(
+                    0.8,
+                    audioContext.currentTime
+                );
+
+
+                oscillator2.connect(gain2);
+
+                gain2.connect(
+                    audioContext.destination
+                );
+
+
+                oscillator2.start();
+
+
+                oscillator2.stop(
+                    audioContext.currentTime +
+                    0.45
+                );
+
+
+            }catch(error){
+
+                console.log(error);
+
+            }
+
+        },400);
+
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+/* BROWSER NOTIFICATION */
+
+function showBrowserNotification(
+    orderId
+){
+
+    if(
+        "Notification" in window &&
+        Notification.permission ===
+        "granted"
+    ){
+
+        try{
+
+            new Notification(
+                "🔔 SHRIF CHULA RESTAURANT",
+                {
+                    body:
+                    "🆕 New Order Arrive\nOrder ID: " +
+                    orderId
+                }
+            );
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    }
+
+}
+
+
+/* SCREEN NOTIFICATION */
+
+function showScreenNotification(
+    orderId
+){
+
+    const box =
+    document.getElementById(
+        "notificationBox"
+    );
+
+
+    const text =
+    document.getElementById(
+        "notificationText"
+    );
+
+
+    text.innerText =
+    "🆕 New Order Arrive\nOrder ID: " +
+    orderId;
+
+
+    box.classList.add(
+        "show"
+    );
+
+}
+
+
+/* CLOSE NOTIFICATION */
+
+function closeNotification(){
+
+    document
+    .getElementById(
+        "notificationBox"
+    )
+    .classList.remove(
+        "show"
+    );
+
+}
+
+
+/* CHECK NEW ORDERS */
+
+function checkNewOrders(
+    currentOrders
+){
+
+    const currentIds =
+    currentOrders.map(
+        order =>
+        String(
+            order.orderId
+        )
+    );
+
+
+    if(firstLoad){
+
+        previousOrderIds =
+        currentIds;
+
+        firstLoad = false;
+
+        return;
+
+    }
+
+
+    currentIds.forEach(id=>{
+
+        if(
+            id &&
+            !previousOrderIds.includes(id)
+        ){
+
+            console.log(
+                "🆕 NEW ORDER:",
+                id
+            );
+
+
+            playNotificationSound();
+
+            showBrowserNotification(
+                id
+            );
+
+            showScreenNotification(
+                id
+            );
+
+        }
+
+    });
+
+
+    previousOrderIds =
+    currentIds;
+
+}
+
+
+/* AUTOMATIC RETRY */
+
+function scheduleRetry(){
+
+    if(retryTimer){
+
+        clearTimeout(
+            retryTimer
+        );
+
+    }
+
+
+    retryCount++;
+
+
+    const delay =
+    Math.min(
+        3000 * retryCount,
+        MAX_RETRY_DELAY
+    );
+
+
+    setConnectionStatus(
+        "🔄 Connection failed — " +
+        Math.round(delay / 1000) +
+        " sec में फिर कोशिश होगी...",
+        "retrying"
+    );
+
+
+    retryTimer =
+    setTimeout(()=>{
+
+        retryTimer = null;
+
+        loadOrders();
+
+    },delay);
+
+}
+
+
+/* LOAD ORDERS */
+
+async function loadOrders(){
+
+    if(isLoading){
+
+        return;
+
+    }
+
+
+    /*
+       Backend URL अभी DEMO में set नहीं है।
+    */
+
+    if(
+        !BACKEND_URL ||
+        BACKEND_URL ===
+        "PASTE_DEMO_BACKEND_URL_HERE"
+    ){
+
+        setConnectionStatus(
+            "⚙️ Demo backend अभी connect नहीं है"
+        );
+
+
+        document
+        .getElementById(
+            "orders"
+        )
+        .innerHTML =
+        '<div class="empty">DEMO Kitchen तैयार है।<br><br>अगले step में नया Demo Google Apps Script backend connect किया जाएगा।</div>';
+
+
+        return;
+
+    }
+
+
+    isLoading = true;
+
+
+    try{
+
+        const response =
+        await fetch(
+            BACKEND_URL +
+            "?t=" +
+            Date.now(),
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP Error: " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+        await response.json();
+
+
+        if(
+            !Array.isArray(data)
+        ){
+
+            throw new Error(
+                "Invalid backend response"
+            );
+
+        }
+
+
+        retryCount = 0;
+
+
+        if(retryTimer){
+
+            clearTimeout(
+                retryTimer
+            );
+
+            retryTimer = null;
+
+        }
+
+
+        setConnectionStatus(
+            "🟢 Connected",
+            "online"
+        );
+
+
+        if(
+            data.length < 2
+        ){
+
+            allOrders = [];
+
+
+            document
+            .getElementById(
+                "orderCount"
+            )
+            .innerText =
+            "Orders: 0";
+
+
+            renderOrders();
+
+
+            return;
+
+        }
+
+
+        const rows =
+        data.slice(1);
+
+
+        const orders = {};
+
+
+        rows.forEach(row=>{
+
+            if(
+                !row ||
+                row.length < 8
+            ){
+
+                return;
+
+            }
+
+
+            const time =
+            row[0];
+
+            const table =
+            row[1];
+
+            const item =
+            row[2];
+
+            const qty =
+            Number(row[3]) || 0;
+
+            const price =
+            Number(row[4]) || 0;
+
+            const total =
+            Number(row[5]) || 0;
+
+            const status =
+            row[6] || "New";
+
+            const orderId =
+            String(
+                row[7] || ""
+            );
+
+
+            if(!orderId){
+
+                return;
+
+            }
+
+
+            if(!orders[orderId]){
+
+                orders[orderId] = {
+
+                    orderId:
+                    orderId,
+
+                    time:
+                    time,
+
+                    table:
+                    table,
+
+                    status:
+                    status,
+
+                    items:
+                    [],
+
+                    total:
+                    0
+
+                };
+
+            }
+
+
+            orders[orderId]
+            .items
+            .push({
+
+                name:
+                item,
+
+                qty:
+                qty,
+
+                price:
+                price,
+
+                total:
+                total
+
+            });
+
+
+            orders[orderId]
+            .total +=
+            total;
+
+
+            orders[orderId]
+            .status =
+            status;
+
+        });
+
+
+        const newOrders =
+        Object.values(
+            orders
+        );
+
+
+        checkNewOrders(
+            newOrders
+        );
+
+
+        allOrders =
+        newOrders;
+
+
+        allOrders.reverse();
+
+
+        document
+        .getElementById(
+            "orderCount"
+        )
+        .innerText =
+        "Orders: " +
+        allOrders.length;
+
+
+        renderOrders();
+
+
+    }catch(error){
+
+        console.error(
+            "Load orders failed:",
+            error
+        );
+
+
+        if(allOrders.length === 0){
+
+            document
+            .getElementById(
+                "orders"
+            )
+            .innerHTML =
+            '<div class="empty">Orders load नहीं हो सके। Internet check करें।<br><br>🔄 Automatic retry चल रहा है...</div>';
+
+        }
+
+
+        scheduleRetry();
+
+
+    }finally{
+
+        isLoading = false;
+
+    }
+
+}
+
+
+/* RENDER ORDERS */
+
+function renderOrders(){
+
+    const box =
+    document.getElementById(
+        "orders"
+    );
+
+
+    if(
+        allOrders.length === 0
+    ){
+
+        box.innerHTML =
+        '<div class="empty">अभी कोई order नहीं है।</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    allOrders.forEach(
+        order=>{
+
+            const card =
+            document.createElement(
+                "div"
+            );
+
+
+            card.className =
+            "order " +
+            String(
+                order.status
+            ).toLowerCase();
+
+
+            let itemsHTML =
+            "";
+
+
+            order.items.forEach(
+                item=>{
+
+                    itemsHTML += `
+
+                        <div class="item">
+
+                            <span>
+
+                                ${escapeHTML(
+                                    item.name
+                                )}
+
+                                × ${item.qty}
+
+                            </span>
+
+
+                            <span>
+
+                                ₹${item.total}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            card.innerHTML = `
+
+                <div class="order-head">
+
+                    <div class="table">
+
+                        🪑 Table
+                        ${escapeHTML(
+                            order.table
+                        )}
+
+                    </div>
+
+
+                    <div class="time">
+
+                        ${escapeHTML(
+                            order.time
+                        )}
+
+                    </div>
+
                 </div>
 
-                <select onchange="changeStatus(${i + 1}, this.value)">
 
-                    <option value="New"
-                    ${status == "New" ? "selected" : ""}>
-                    New
-                    </option>
+                <div>
 
-                    <option value="Preparing"
-                    ${status == "Preparing" ? "selected" : ""}>
-                    Preparing
-                    </option>
+                    ${itemsHTML}
 
-                    <option value="Complete"
-                    ${status == "Complete" ? "selected" : ""}>
-                    Complete
-                    </option>
+                </div>
 
-                    <option value="Delivered"
-                    ${status == "Delivered" ? "selected" : ""}>
-                    Delivered
-                    </option>
 
-                </select>
+                <div class="total">
+
+                    Total:
+                    ₹${order.total}
+
+                </div>
+
+
+                <div class="status">
+
+                    Status:
+                    ${escapeHTML(
+                        order.status
+                    )}
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button
+                        class="prepare"
+                        onclick="changeStatus(
+                            '${escapeAttribute(
+                                order.orderId
+                            )}',
+                            'Preparing'
+                        )">
+
+                        🔥 Preparing
+
+                    </button>
+
+
+                    <button
+                        class="complete"
+                        onclick="changeStatus(
+                            '${escapeAttribute(
+                                order.orderId
+                            )}',
+                            'Complete'
+                        )">
+
+                        ✅ Complete
+
+                    </button>
+
+
+                    <button
+                        class="delivered"
+                        onclick="changeStatus(
+                            '${escapeAttribute(
+                                order.orderId
+                            )}',
+                            'Delivered'
+                        )">
+
+                        🚚 Delivered
+
+                    </button>
+
+
+                    <button
+                        class="delete"
+                        onclick="deleteOrder(
+                            '${escapeAttribute(
+                                order.orderId
+                            )}'
+                        )">
+
+                        🗑️ Delete
+
+                    </button>
+
+                </div>
+
             `;
 
-            orders.appendChild(orderBox);
+
+            box.appendChild(
+                card
+            );
+
         }
+    );
 
-    })
-
-    .catch(error => {
-
-        console.error(error);
-
-        document.getElementById("message").textContent =
-            "❌ Orders load नहीं हो सके।";
-
-    });
 }
 
 
-function changeStatus(row, status) {
+/* CHANGE STATUS */
 
-    fetch(SCRIPT_URL, {
+async function changeStatus(
+    orderId,
+    status
+){
 
-        method: "POST",
+    if(
+        !BACKEND_URL ||
+        BACKEND_URL ===
+        "PASTE_DEMO_BACKEND_URL_HERE"
+    ){
 
-        headers: {
-            "Content-Type":
-            "text/plain;charset=utf-8"
-        },
+        alert(
+            "Demo backend अभी connect नहीं है।"
+        );
 
-        body: JSON.stringify({
-            action: "updateStatus",
-            row: row,
-            status: status
-        })
+        return;
 
-    })
+    }
 
-    .then(response => response.json())
 
-    .then(data => {
+    try{
 
-        if (data.success) {
+        const response =
+        await fetch(
+            BACKEND_URL,
+            {
 
-            alert("✅ Status updated: " + status);
+                method:
+                "POST",
 
-        } else {
+                body:
+                JSON.stringify({
 
-            alert("❌ Status update नहीं हुआ।");
+                    action:
+                    "updateStatus",
+
+                    orderId:
+                    orderId,
+
+                    status:
+                    status
+
+                })
+
+            }
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Status update failed"
+            );
 
         }
 
-    })
 
-    .catch(error => {
+        loadOrders();
 
-        console.error(error);
 
-        alert("❌ Error हुआ।");
+    }catch(error){
 
-    });
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Status update नहीं हुआ। Internet check करें।"
+        );
+
+    }
+
 }
 
 
-/* पहली बार orders load */
+/* DELETE ORDER */
+
+async function deleteOrder(
+    orderId
+){
+
+    const confirmDelete =
+    confirm(
+        "क्या आप इस पूरे order को delete करना चाहते हैं?"
+    );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+    if(
+        !BACKEND_URL ||
+        BACKEND_URL ===
+        "PASTE_DEMO_BACKEND_URL_HERE"
+    ){
+
+        alert(
+            "Demo backend अभी connect नहीं है।"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+        await fetch(
+            BACKEND_URL,
+            {
+
+                method:
+                "POST",
+
+                body:
+                JSON.stringify({
+
+                    action:
+                    "deleteOrder",
+
+                    orderId:
+                    orderId
+
+                })
+
+            }
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Delete failed"
+            );
+
+        }
+
+
+        loadOrders();
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Order delete नहीं हुआ। Internet check करें।"
+        );
+
+    }
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(
+    value
+){
+
+    return String(value)
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function escapeAttribute(
+    value
+){
+
+    return escapeHTML(
+        value
+    );
+
+}
+
+
+/* FIRST LOAD */
+
 loadOrders();
 
 
-/* हर 10 सेकंड में नए orders check */
-setInterval(loadOrders, 10000);
+/* CHECK EVERY 15 SECONDS */
+
+setInterval(
+    function(){
+
+        loadOrders();
+
+    },
+    15000
+);
 
 </script>
 
